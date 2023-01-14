@@ -1,9 +1,9 @@
-package elZ3amaa;
+package engine;
 
 public class SQLTerm {
-	String _strTableName;
-	String _strColumnName;
+	public String _strTableName;
+	public String _strColumnName;
 	String _strOperator;
-	Object _objValue;
+	public Object _objValue;
 
 }

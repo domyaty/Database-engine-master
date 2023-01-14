@@ -1,4 +1,4 @@
-package elZ3amaa;
+package Database;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.Vector;
 import BPTree.*;
-import elZ3amaa.DBAppException;
+import engine.*;
 
 public class DBApp implements Serializable {
 
@@ -120,8 +120,7 @@ public class DBApp implements Serializable {
 			if (s.equals(cluster)) {
 				index = cluster;
 				break;
-			}
-			else {
+			} else {
 				index = s;
 			}
 		}
@@ -132,7 +131,7 @@ public class DBApp implements Serializable {
 			p.insertIntoPage(htblColNameValue, t.strClusteringKeyColumn);
 			t.pages.add(pagename);
 			if (index != "") {
-				BPTree tree = t.deserializeTree(strTableName + index);
+				BPTree tree = Table.deserializeTree(strTableName + index);
 				Vector<int[]> v = new Vector<int[]>();
 				Ref r = new Ref(0, 0, v);
 				tree.insert((Comparable) htblColNameValue.get(index), r);
@@ -822,34 +821,35 @@ public class DBApp implements Serializable {
 
 		DBApp dbApp = new DBApp();
 
-//		System.out.println(getIndex("shady"));
-//		BPTree tree = new BPTree();
-//		tree = deserializeTree("shadyid");
-//		System.out.println(tree.search(4).pageNo);
-//		System.out.println(tree.search(4).indexInPage);
-//		System.out.println(tree.toString());
+		// System.out.println(getIndex("shady"));
+		// BPTree tree = new BPTree();
+		// tree = deserializeTree("shadyid");
+		// System.out.println(tree.search(4).pageNo);
+		// System.out.println(tree.search(4).indexInPage);
+		// System.out.println(tree.toString());
 
-//		Ref r = tree.search(0);
-//		for (int i = 0; i < r.overflow.size(); i++) {
-//			int[] arr = r.overflow.get(i);
-//			System.out.println("index of page:"+arr[0]+" index of record:"+arr[1]);
-//		}
+		// Ref r = tree.search(0);
+		// for (int i = 0; i < r.overflow.size(); i++) {
+		// int[] arr = r.overflow.get(i);
+		// System.out.println("index of page:"+arr[0]+" index of record:"+arr[1]);
+		// }
 
-//		Hashtable<String, String> htblColNameType = new Hashtable<String, String>();
-//		htblColNameType.put("id", "java.lang.Integer");
-//		htblColNameType.put("name", "java.lang.String");
-//		htblColNameType.put("gpa", "java.lang.Double");
-//		dbApp.createTable("shady", "id", htblColNameType);
-//		dbApp.createBTreeIndex("mohamed", "name");
-//		
-//		for (int i = 0; i < 8; i++) {
-//			Hashtable<String, Object> htblColNameValue4 = new Hashtable<String, Object>();
-//			htblColNameValue4.put("id", new Integer(i));
-//			htblColNameValue4.put("name", new String("mohamed Noor"));
-//			htblColNameValue4.put("gpa", new Double(0.95));
-//			dbApp.insertIntoTable("mohamed", htblColNameValue4);
-//			htblColNameValue4.clear();
-//		}
+		// Hashtable<String, String> htblColNameType = new Hashtable<String, String>();
+		// htblColNameType.put("id", "java.lang.Integer");
+		// htblColNameType.put("name", "java.lang.String");
+		// htblColNameType.put("gpa", "java.lang.Double");
+		// dbApp.createTable("shady", "id", htblColNameType);
+		// dbApp.createBTreeIndex("mohamed", "name");
+		//
+		// for (int i = 0; i < 8; i++) {
+		// Hashtable<String, Object> htblColNameValue4 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue4.put("id", new Integer(i));
+		// htblColNameValue4.put("name", new String("mohamed Noor"));
+		// htblColNameValue4.put("gpa", new Double(0.95));
+		// dbApp.insertIntoTable("mohamed", htblColNameValue4);
+		// htblColNameValue4.clear();
+		// }
 
 		Hashtable<String, Object> htblColNameValue0 = new Hashtable<String, Object>();
 		htblColNameValue0.put("id", new Integer(0));
@@ -857,47 +857,52 @@ public class DBApp implements Serializable {
 		htblColNameValue0.put("gpa", new Double(1.0));
 		dbApp.insertIntoTable("mohamed", htblColNameValue0);
 
-//		Hashtable<String, Object> htblColNameValue = new Hashtable<String, Object>();
-////		htblColNameValue.put("id", new Integer(0));
-//		htblColNameValue.put("name", new String("ahmed" ) );
-//		htblColNameValue.put("gpa", new Double(2.0) );
-//		dbApp.updateTable("shady","9", htblColNameValue);
+		// Hashtable<String, Object> htblColNameValue = new Hashtable<String, Object>();
+		//// htblColNameValue.put("id", new Integer(0));
+		// htblColNameValue.put("name", new String("ahmed" ) );
+		// htblColNameValue.put("gpa", new Double(2.0) );
+		// dbApp.updateTable("shady","9", htblColNameValue);
 
-//		Hashtable<String, Object> htblColNameValue2 = new Hashtable<String, Object>(); 
-//		htblColNameValue2.put("id", new Integer(9));
-//		htblColNameValue2.put("name", new String("basel" ) );
-//		htblColNameValue2.put("gpa", new Double(1.0) );
-//		dbApp.deleteFromTable( "shady" , htblColNameValue2);
-//		
-//		Hashtable<String, Object> htblColNameValue4 = new Hashtable<String, Object>(); 
-//		htblColNameValue4.put("id", new Integer(48));
-//		htblColNameValue4.put("name", new String("Ahmed Noor" ) );
-//		htblColNameValue4.put("gpa", new Double(0.95) );
-//		dbApp.deleteFromTable( "ahmed" , htblColNameValue4);
-//		
-//		
-//		Hashtable<String, Object> htblColNameValue5 = new Hashtable<String, Object>(); 
-//		htblColNameValue5.put("id", new Integer(34));
-//		htblColNameValue5.put("name", new String("Ahmed Noor" ) );
-//		htblColNameValue5.put("gpa", new Double(0.95) );
-//		dbApp.deleteFromTable( "ahmed" , htblColNameValue5);
-//		
-//		
-//		Hashtable<String, Object> htblColNameValue3 = new Hashtable<String, Object>(); 
-//		htblColNameValue3.put("id", new Integer(35));
-//		htblColNameValue3.put("name", new String("Ahmed Noor" ) );
-//		htblColNameValue3.put("gpa", new Double(0.95) );
-//		dbApp.deleteFromTable( "ahmed" , htblColNameValue3);
+		// Hashtable<String, Object> htblColNameValue2 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue2.put("id", new Integer(9));
+		// htblColNameValue2.put("name", new String("basel" ) );
+		// htblColNameValue2.put("gpa", new Double(1.0) );
+		// dbApp.deleteFromTable( "shady" , htblColNameValue2);
+		//
+		// Hashtable<String, Object> htblColNameValue4 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue4.put("id", new Integer(48));
+		// htblColNameValue4.put("name", new String("Ahmed Noor" ) );
+		// htblColNameValue4.put("gpa", new Double(0.95) );
+		// dbApp.deleteFromTable( "ahmed" , htblColNameValue4);
+		//
+		//
+		// Hashtable<String, Object> htblColNameValue5 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue5.put("id", new Integer(34));
+		// htblColNameValue5.put("name", new String("Ahmed Noor" ) );
+		// htblColNameValue5.put("gpa", new Double(0.95) );
+		// dbApp.deleteFromTable( "ahmed" , htblColNameValue5);
+		//
+		//
+		// Hashtable<String, Object> htblColNameValue3 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue3.put("id", new Integer(35));
+		// htblColNameValue3.put("name", new String("Ahmed Noor" ) );
+		// htblColNameValue3.put("gpa", new Double(0.95) );
+		// dbApp.deleteFromTable( "ahmed" , htblColNameValue3);
 
-//		Hashtable<String, Object> htblColNameValue6 = new Hashtable<String, Object>(); 
-//		htblColNameValue6.put("id", new Integer(43));
-//		htblColNameValue6.put("name", new String("Ahmed Noor" ) );
-//		htblColNameValue6.put("gpa", new Double(0.95) );
-//		dbApp.deleteFromTable( "ahmed" , htblColNameValue6);
+		// Hashtable<String, Object> htblColNameValue6 = new Hashtable<String,
+		// Object>();
+		// htblColNameValue6.put("id", new Integer(43));
+		// htblColNameValue6.put("name", new String("Ahmed Noor" ) );
+		// htblColNameValue6.put("gpa", new Double(0.95) );
+		// dbApp.deleteFromTable( "ahmed" , htblColNameValue6);
 
-//		Page.deletePage(t.pages.get(t.pages.size()-1));
-//		t.pages.remove(t.pages.size()-1);
-//		Table.serializeTable(t, t.strTableName);
+		// Page.deletePage(t.pages.get(t.pages.size()-1));
+		// t.pages.remove(t.pages.size()-1);
+		// Table.serializeTable(t, t.strTableName);
 
 		String strTableName = "mohamed";
 		Table t = Table.deserializeTable(strTableName);
@@ -914,34 +919,33 @@ public class DBApp implements Serializable {
 				System.out.println((tree.search((String) l.getKey(i))).pageNo + "  "
 						+ (tree.search((String) l.getKey(i))).indexInPage);
 				for (int j = 0; j < tree.search((String) l.getKey(i)).getOverFlow().size(); j++) {
-					int [] arr = (int[])tree.search((String) l.getKey(i)).getOverFlow().get(j);
-					System.out.println(arr[0] +"  "+arr[1]);
+					int[] arr = (int[]) tree.search((String) l.getKey(i)).getOverFlow().get(j);
+					System.out.println(arr[0] + "  " + arr[1]);
 				}
 			}
 			l = l.getNext();
 			System.out.println();
 			System.out.println();
 		}
-		
-		
-//		System.out.println(getIndex(strTableName));
 
-//		int x = t.binarySearchOnPages("name", "cat");
-//		
-//		String pageName = strTableName + (x+1) ;
-//		Page p2 = new Page();
-//		p2 = Page.deserializePage(pageName);
-//		
-//		
-//		System.out.println(p2.page_name);
-//		
-//		int y = p2.binarySearchOnRecords("name", "cat");
-//		System.out.println(y);
+		// System.out.println(getIndex(strTableName));
 
-//		System.out.println(t.pages.size());
-//		System.out.println(t.page_capacity);
-//		
-//
+		// int x = t.binarySearchOnPages("name", "cat");
+		//
+		// String pageName = strTableName + (x+1) ;
+		// Page p2 = new Page();
+		// p2 = Page.deserializePage(pageName);
+		//
+		//
+		// System.out.println(p2.page_name);
+		//
+		// int y = p2.binarySearchOnRecords("name", "cat");
+		// System.out.println(y);
+
+		// System.out.println(t.pages.size());
+		// System.out.println(t.page_capacity);
+		//
+		//
 		for (int i = 0; i < t.pages.size(); i++) {
 			Page p = new Page();
 			p = Page.deserializePage((t.pages.get(i)));
@@ -957,28 +961,28 @@ public class DBApp implements Serializable {
 		System.out.println();
 		System.out.println();
 
-//		SQLTerm[] arrSQLTerms;
-//		arrSQLTerms = new SQLTerm[3];
-//		for (int i = 0; i < arrSQLTerms.length; i++) {
-//			arrSQLTerms[i] = new SQLTerm();
-//		}
-//		arrSQLTerms[0]._strTableName = "mohamed";
-//		arrSQLTerms[0]._strColumnName = "name";
-//		arrSQLTerms[0]._strOperator = "=";
-//		arrSQLTerms[0]._objValue = "aa";
-//		arrSQLTerms[1]._strTableName = "shady";
-//		arrSQLTerms[1]._strColumnName = "id";
-//		arrSQLTerms[1]._strOperator = "=";
-//		arrSQLTerms[1]._objValue = new Integer(3);
-//		arrSQLTerms[2]._strTableName = "shady";
-//		arrSQLTerms[2]._strColumnName = "gpa";
-//		arrSQLTerms[2]._strOperator = "=";
-//		arrSQLTerms[2]._objValue = new Double(1.0);
-//		String[] strarrOperators = new String[2];
-//		strarrOperators[0] = "OR";
-//		strarrOperators[1] = "AND";
-//		// select * from Student where name = John Noor or gpa = 1.5;
-//		Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
+		// SQLTerm[] arrSQLTerms;
+		// arrSQLTerms = new SQLTerm[3];
+		// for (int i = 0; i < arrSQLTerms.length; i++) {
+		// arrSQLTerms[i] = new SQLTerm();
+		// }
+		// arrSQLTerms[0]._strTableName = "mohamed";
+		// arrSQLTerms[0]._strColumnName = "name";
+		// arrSQLTerms[0]._strOperator = "=";
+		// arrSQLTerms[0]._objValue = "aa";
+		// arrSQLTerms[1]._strTableName = "shady";
+		// arrSQLTerms[1]._strColumnName = "id";
+		// arrSQLTerms[1]._strOperator = "=";
+		// arrSQLTerms[1]._objValue = new Integer(3);
+		// arrSQLTerms[2]._strTableName = "shady";
+		// arrSQLTerms[2]._strColumnName = "gpa";
+		// arrSQLTerms[2]._strOperator = "=";
+		// arrSQLTerms[2]._objValue = new Double(1.0);
+		// String[] strarrOperators = new String[2];
+		// strarrOperators[0] = "OR";
+		// strarrOperators[1] = "AND";
+		// // select * from Student where name = John Noor or gpa = 1.5;
+		// Iterator resultSet = dbApp.selectFromTable(arrSQLTerms, strarrOperators);
 
 	}
 

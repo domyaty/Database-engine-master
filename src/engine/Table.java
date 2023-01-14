@@ -1,4 +1,4 @@
-package elZ3amaa;
+package engine;
 
 import java.util.Date;
 import java.io.BufferedReader;
@@ -19,11 +19,11 @@ public class Table implements Serializable {
 	static final long serialVersionUID = 1L;
 
 	int page_capacity;
-	int NodeSize;
-	String strTableName;
-	String strClusteringKeyColumn;
-	Hashtable<String, String> htblColNameType = new Hashtable<String, String>();
-	Vector<String> pages = new Vector<String>();
+	public int NodeSize;
+	public String strTableName;
+	public String strClusteringKeyColumn;
+	public Hashtable<String, String> htblColNameType = new Hashtable<String, String>();
+	public Vector<String> pages = new Vector<String>();
 
 	public Table() {
 
@@ -130,7 +130,7 @@ public class Table implements Serializable {
 		Table t = new Table();
 		t = Table.deserializeTable(strTableName);
 
-//		int num = which_page(htblColNameValue);
+		// int num = which_page(htblColNameValue);
 
 		int num = binarySearchOnPages(getClusteringInfo().get("cluster"),
 				htblColNameValue.get(getClusteringInfo().get("cluster")).toString());
@@ -208,21 +208,21 @@ public class Table implements Serializable {
 
 	}
 
-//	public void UpdateRefInTree(int startPage, int startRecord) {
-//		
-//		for (int i = startPage; i < pages.size(); i++) {
-//		
-//			Page p = Page.deserializePage(this.pages.get(i));
-//			if (i > startPage) {
-//				startRecord = 0;
-//			}
-//			for (int j = startRecord + 1; j < p.record.size(); j++) {
-//				
-//			}
-//	
-//		}
-//		
-//	}
+	// public void UpdateRefInTree(int startPage, int startRecord) {
+	//
+	// for (int i = startPage; i < pages.size(); i++) {
+	//
+	// Page p = Page.deserializePage(this.pages.get(i));
+	// if (i > startPage) {
+	// startRecord = 0;
+	// }
+	// for (int j = startRecord + 1; j < p.record.size(); j++) {
+	//
+	// }
+	//
+	// }
+	//
+	// }
 
 	public void UpdateRefInTree(int startPage, int startRecord) {
 
@@ -465,9 +465,9 @@ public class Table implements Serializable {
 				}
 			}
 		}
-//		}
+		// }
 
-//		}
+		// }
 
 	}
 

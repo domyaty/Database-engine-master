@@ -1,4 +1,4 @@
-package elZ3amaa;
+package engine;
 
 public class DBAppException extends Exception {
 	public DBAppException(String message) {

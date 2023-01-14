@@ -1,4 +1,4 @@
-package elZ3amaa;
+package engine;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,9 +14,9 @@ import java.util.Vector;
 
 public class Page implements Serializable {
 	static final long serialVersionUID = 1L;
-	Vector<Hashtable<String, Object>> record;
+	public Vector<Hashtable<String, Object>> record;
 	String key;
-	String page_name;
+	public String page_name;
 
 	public Page() {
 
@@ -52,7 +52,7 @@ public class Page implements Serializable {
 						return i;
 					} else if (record.size() - 1 == i) {
 						record.add(i + 1, htblColNameValue);
-						return i+1;
+						return i + 1;
 					} else {
 						continue;
 					}
@@ -64,7 +64,7 @@ public class Page implements Serializable {
 						return i;
 					} else if (record.size() - 1 == i) {
 						record.add(i + 1, htblColNameValue);
-						return i+1;
+						return i + 1;
 					} else {
 						continue;
 					}
@@ -76,7 +76,7 @@ public class Page implements Serializable {
 						return i;
 					} else if (record.size() - 1 == i) {
 						record.add(i + 1, htblColNameValue);
-						return i+1;
+						return i + 1;
 					} else {
 						continue;
 					}
@@ -88,7 +88,7 @@ public class Page implements Serializable {
 						return i;
 					} else if (record.size() - 1 == i) {
 						record.add(i + 1, htblColNameValue);
-						return i+1;
+						return i + 1;
 					} else {
 						continue;
 					}
@@ -105,7 +105,7 @@ public class Page implements Serializable {
 				return first;
 			} else if (first == last && first == mid && first == record.size() - 1) {
 				record.add(first + 1, htblColNameValue);
-				return first+1;
+				return first + 1;
 			}
 			if (mid == 0) {
 				record.add(mid, htblColNameValue);
@@ -123,7 +123,7 @@ public class Page implements Serializable {
 					return last;
 				} else if (first == (record.size() - 1)) {
 					record.add(first + 1, htblColNameValue);
-					return first+1;
+					return first + 1;
 				} else if ((int) clusterOfInput < (int) clusterInRecord
 						&& !((int) clusterOfInput >= (int) valueBeforeMid)) {
 					last = mid - 1;
@@ -134,7 +134,7 @@ public class Page implements Serializable {
 
 				} else if ((int) clusterOfInput > (int) clusterInRecord) {
 					record.add(mid + 1, htblColNameValue);
-					return mid+1;
+					return mid + 1;
 				} else {
 					record.add(mid, htblColNameValue);
 					return mid;
@@ -148,7 +148,7 @@ public class Page implements Serializable {
 					return last;
 				} else if (first == record.size() - 1) {
 					record.add(first + 1, htblColNameValue);
-					return first+1;
+					return first + 1;
 				} else if ((Double) clusterOfInput < (Double) clusterInRecord
 						&& !((Double) clusterOfInput > (Double) valueBeforeMid)) {
 					last = mid - 1;
@@ -159,7 +159,7 @@ public class Page implements Serializable {
 
 				} else if ((Double) clusterOfInput > (Double) clusterInRecord) {
 					record.add(mid + 1, htblColNameValue);
-					return mid+1;
+					return mid + 1;
 				} else {
 					record.add(mid, htblColNameValue);
 					return mid;
@@ -173,7 +173,7 @@ public class Page implements Serializable {
 					return last;
 				} else if (first == record.size() - 1) {
 					record.add(first + 1, htblColNameValue);
-					return first+1;
+					return first + 1;
 				} else if (((String) clusterOfInput).compareTo((String) clusterInRecord) < 0
 						&& !(((String) clusterOfInput).compareTo((String) valueBeforeMid) > 0)) {
 					last = mid - 1;
@@ -184,7 +184,7 @@ public class Page implements Serializable {
 
 				} else if (((String) clusterOfInput).compareTo((String) clusterInRecord) > 0) {
 					record.add(mid + 1, htblColNameValue);
-					return mid+1;
+					return mid + 1;
 				} else {
 					record.add(mid, htblColNameValue);
 					return mid;
@@ -198,7 +198,7 @@ public class Page implements Serializable {
 					return last;
 				} else if (first == record.size() - 1) {
 					record.add(first + 1, htblColNameValue);
-					return first+1;
+					return first + 1;
 				} else if (((Date) clusterOfInput).compareTo((Date) clusterInRecord) < 0
 						&& !(((Date) clusterOfInput).compareTo((Date) valueBeforeMid) > 0)) {
 					last = mid - 1;
@@ -209,7 +209,7 @@ public class Page implements Serializable {
 
 				} else if (((Date) clusterOfInput).compareTo((Date) clusterInRecord) > 0) {
 					record.add(mid + 1, htblColNameValue);
-					return mid+1;
+					return mid + 1;
 				} else {
 					record.add(mid, htblColNameValue);
 					return mid;
@@ -416,7 +416,7 @@ public class Page implements Serializable {
 				}
 
 				else if (clusterInRecord.matches("^[ A-Za-z]+$")) {
-					
+
 					if (strClusteringKey.compareTo(clusterInRecord) > 0) {
 						first = mid + 1;
 					}
@@ -1044,7 +1044,7 @@ public class Page implements Serializable {
 
 		return mid;
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println("ahmed".compareToIgnoreCase("mohamed"));
 	}
